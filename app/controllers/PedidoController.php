@@ -74,7 +74,7 @@ class PedidoController extends Pedido implements IApiUsable
             $response->getBody()->write($payload);
         }
         else{
-            $response->withStatus(404, "No se encuentra pedido");
+            $response = $response->withStatus(404, "No se encuentra pedido");
         }
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -96,7 +96,7 @@ class PedidoController extends Pedido implements IApiUsable
             $response->getBody()->write($payload);
         }
         else{
-            $response->withStatus(404, "No se encuentra pedido");
+            $response = $response->withStatus(404, "No se encuentra pedido");
         }
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -137,12 +137,12 @@ class PedidoController extends Pedido implements IApiUsable
         //revisando si el pedido existe y no tiene estimado aun
         if($ped->id_producto == NULL || $ped->estado != "recibido")
         {
-            $response->withStatus(400, "pedido no valido");
+            $response = $response->withStatus(400, "pedido no valido");
 
         }//revisando si el estimado en minutos existe y es mayor a 0
         elseif($minEstimado == NULL || $minEstimado <= 0)
         {
-            $response->withStatus(400, "estimado no valido");
+            $response = $response->withStatus(400, "estimado no valido");
         }else{
             
             $producto = Producto::obtenerPorId($ped->id_producto);
@@ -158,7 +158,7 @@ class PedidoController extends Pedido implements IApiUsable
                 $response->getBody()->write($payload);
             }
             else{
-                $response->withStatus(403, "Forbidden: Rol invalido");
+                $response = $response->withStatus(403, "Forbidden: Rol invalido");
             }
         }
 
@@ -185,7 +185,7 @@ class PedidoController extends Pedido implements IApiUsable
         //revisando si el pedido existe y esta en preparacion
         if($ped->estado != "preparando")
         {
-            $response->withStatus(400, "pedido no valido");
+            $response = $response->withStatus(400, "pedido no valido");
         }else{
             $producto = Producto::obtenerPorId($ped->id_producto);
             //revisando si el producto es del sector del empleado o si es socio
@@ -199,7 +199,7 @@ class PedidoController extends Pedido implements IApiUsable
                 $response->getBody()->write($payload);
             }
             else{
-                $response->withStatus(403, "Forbidden: Rol invalido");
+                $response = $response->withStatus(403, "Forbidden: Rol invalido");
             }
         }
 
@@ -220,7 +220,7 @@ class PedidoController extends Pedido implements IApiUsable
         //revisando si el pedido existe y esta siendo preparado
         if($ped->estado != "listo")
         {
-            $response->withStatus(400, "pedido no valido");
+            $response = $response->withStatus(400, "pedido no valido");
         }else{
             //cuando todo esta bien, arrancamos
             $ped->estado = "entregado";
@@ -245,7 +245,7 @@ class PedidoController extends Pedido implements IApiUsable
         //revisando si el pedido existe y esta siendo preparado
         if($ped->estado != "entregado")
         {
-            $response->withStatus(400, "pedido no valido");
+            $response =  $response->withStatus(400, "pedido no valido");
         }else{
             //cuando todo esta bien, arrancamos
             $ped->estado = "pagado";
@@ -270,7 +270,7 @@ class PedidoController extends Pedido implements IApiUsable
         //revisando si el pedido existe y no fue entregado al cliente
         if($ped->estado == "pagado" || $ped->estado == "cancelado" || $ped->estado == "entregado")
         {
-            $response->withStatus(400, "pedido no valido");
+            $response = $response->withStatus(400, "pedido no valido");
         }else{
             //cuando todo esta bien, arrancamos
             $ped->estado = "cancelado";
@@ -300,7 +300,7 @@ class PedidoController extends Pedido implements IApiUsable
             $response->getBody()->write($payload);
         }
         else{
-            $response->withStatus(400, "Estado no valido");    
+            $response = $response->withStatus(400, "Estado no valido");    
         }
 
         
@@ -334,7 +334,7 @@ class PedidoController extends Pedido implements IApiUsable
             $response->getBody()->write($payload);
         }
         else{
-            $response->withStatus(404, "No se encuentra pedido");
+            $response = $response->withStatus(404, "No se encuentra pedido");
         }
         return $response
           ->withHeader('Content-Type', 'application/json');

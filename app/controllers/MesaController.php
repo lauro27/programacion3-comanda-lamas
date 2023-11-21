@@ -88,8 +88,6 @@ class MesaController extends Mesa implements IApiUsable
         $cod = $parametros['codigo'];
         $m = Mesa::obtenerMesa($cod);
         $e = $parametros['estado'];
-        var_dump($cod);
-        var_dump($e);
         
         $response = new Response();
 
@@ -138,7 +136,7 @@ class MesaController extends Mesa implements IApiUsable
                 foreach ($a as $key => $value) {
                     $prod = Producto::obtenerPorId($value->id_producto);
                     $total += $prod->precio;
-                    array_push($listaProd, json_encode($prod));
+                    array_push($listaProd, $prod);
                 }
                 $payload = "Productos: " . json_encode($listaProd);
                 $payload .= " - Total: " . $total;

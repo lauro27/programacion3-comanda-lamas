@@ -109,13 +109,12 @@ class UsuarioController extends Usuario implements IApiUsable
       if($path == null){ return $response->withStatus(400, "error con archivo");}
       
       $array = CsvHandler::ObtenerDatosUsuarios($path);
-
       foreach ($array as $key => $value) {
+        
         $user = new Usuario();
         $user->usuario = $value['usuario'];
-        $user->usuario = $value['clave'];
-        $user->usuario = $value['rol'];
-
+        $user->clave = $value['clave'];
+        $user->rol = $value['rol'];
         $user->crearUsuario();
       }
       
@@ -129,5 +128,16 @@ class UsuarioController extends Usuario implements IApiUsable
       }
       return $response
         ->withHeader('Content-Type', 'application/json');;
+    }
+
+    public function DescargarCsv(){
+      $lista = Usuario::obtenerTodos();
+      $csv = CsvHandler::GenerarArchivo($lista);
+      $response = new Response();
+      $response = $response
+        ->withBody(new \Slim\Psr7\Stream(fopen('output.csv', 'r')))
+        ->withHeader('Content-Type', 'text/csv');
+      unlink('output.csv');
+      return $response;
     }
 }

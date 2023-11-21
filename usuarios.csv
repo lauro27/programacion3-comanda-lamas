@@ -1,0 +1,5 @@
+usuario,clave,rol;
+user1,password,mozo;
+user2,password,bartender;
+user1,password,cervecero;
+user2,password,cocinero;

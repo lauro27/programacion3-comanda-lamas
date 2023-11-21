@@ -56,8 +56,10 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
       ->add(new Logger("creando usuario"));
     $group->put('[/]', \UsuarioController::class . 'ModificarUno')
       ->add(new Logger("modificando usuario"));
-    $group->post('/csv', \UsuarioController::class . ':CargarPorCsv')
+    $group->post('/csv[/]', \UsuarioController::class . ':CargarPorCsv')
       ->add(new Logger("creando usuarios por csv"));
+    $group->options('/csv[/]', \UsuarioController::class . ':DescargarCsv')
+    ->add(new Logger("Descargando csv"));
     $group->delete("[/]", \UsuarioController::class . 'BorrarUno')
     ->add(new Logger("borra usuario"));
 })->add(\AuthMW::class . ':LoginSocio');

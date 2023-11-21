@@ -14,6 +14,7 @@ class CsvHandler{
 
                 if ($count != count($arrayColumnas)) {
                     fclose($archivo);
+                    var_dump($array);
                     return array();
                 }
 
@@ -34,6 +35,22 @@ class CsvHandler{
     public static function GenerarCodigo()
     {
         return substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
+    }
+
+    public static function GenerarArchivo($data, $filename = 'output.csv') {
+        $file = fopen($filename, 'w');
+    
+        if (!empty($data)) {
+            $firstRow = reset($data);
+            $header = array_keys(get_object_vars($firstRow));
+            fputcsv($file, $header);
+        }
+    
+        foreach ($data as $row) {
+            fputcsv($file, get_object_vars($row));
+        }
+    
+        fclose($file);
     }
 }
 

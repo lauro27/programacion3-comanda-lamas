@@ -25,7 +25,7 @@ class LoginController{
             return $response->withStatus(401, 'Unauthorized');
         }
         else{
-            $datos = json_encode(array("usuario" => $value->usuario, "id" => $value->id, "rol" => $value->rol));
+            $datos = array("usuario" => $value->usuario, "id" => $value->id, "rol" => $value->rol);
             $token = AutentificadorJWT::CrearToken($datos);
             $rol = $value->rol;
             $response->getBody()->write(json_encode(array("token" => $token)));

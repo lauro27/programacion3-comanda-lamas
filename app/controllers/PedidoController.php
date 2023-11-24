@@ -17,7 +17,7 @@ class PedidoController extends Pedido implements IApiUsable
         $elToken = trim(explode('Bearer', $requestHeader)[1]);
 
         $parametros = $request->getParsedBody();
-        $payload = json_decode(AutentificadorJWT::ObtenerData($elToken));
+        $payload = AutentificadorJWT::ObtenerData($elToken);
         $id = $payload->id;
 
         $response = new Response();
@@ -124,7 +124,7 @@ class PedidoController extends Pedido implements IApiUsable
         $header = $request->getHeaderLine("authorization");
         $token = trim(explode('Bearer', $header)[1]);
 
-        $data = json_decode(AutentificadorJWT::ObtenerData($token));
+        $data = AutentificadorJWT::ObtenerData($token);
 
         //decodear request
         $parametros = $request->getParsedBody();
@@ -173,7 +173,7 @@ class PedidoController extends Pedido implements IApiUsable
         $header = $request->getHeaderLine("authorization");
         $token = trim(explode('Bearer', $header)[1]);
 
-        $data = json_decode(AutentificadorJWT::ObtenerData($token));
+        $data = AutentificadorJWT::ObtenerData($token);
 
         //decodear request
         $parametros = $request->getParsedBody();
@@ -356,7 +356,7 @@ class PedidoController extends Pedido implements IApiUsable
         $header = $request->getHeaderLine("authorization");
         $token = trim(explode('Bearer', $header)[1]);
 
-        $data = json_decode(AutentificadorJWT::ObtenerData($token));
+        $data = AutentificadorJWT::ObtenerData($token);
 
         $array = Pedido::ObtenerPorRol($data->rol);
         foreach ($array as $key => $value) {

@@ -3,9 +3,12 @@
 class Usuario
 {
     public $id;
+    public $nombre;
     public $usuario;
     public $clave;
     public $rol;
+    public $fecha_alta;
+    public $fecha_modificacion;
     public $fecha_baja = null;
 
     public function crearUsuario()

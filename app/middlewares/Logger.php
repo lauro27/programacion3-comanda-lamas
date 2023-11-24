@@ -22,7 +22,7 @@ class Logger
         else{
             $token = trim(explode('Bearer', $header)[1]);
             try {
-                $payload = json_decode(AutentificadorJWT::ObtenerData($token));
+                $payload = AutentificadorJWT::ObtenerData($token);
                 $id = $payload->id;
             } catch (\Throwable $th) {
                 $id = 0;

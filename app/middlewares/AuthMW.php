@@ -26,7 +26,7 @@ class AuthMW
         
         try{
             $token = trim(explode('Bearer', $header)[1]);
-            $payload = json_decode(AutentificadorJWT::ObtenerData($token));
+            $payload = AutentificadorJWT::ObtenerData($token);
             if($payload->rol != "socio"){ throw new Exception("No autorizado");}
 
         }
@@ -47,7 +47,7 @@ class AuthMW
         
         try{
             $token = trim(explode('Bearer', $header)[1]);
-            $payload = json_decode(AutentificadorJWT::ObtenerData($token));
+            $payload = AutentificadorJWT::ObtenerData($token);
             if($payload->rol != "socio" && $payload->rol != 'mozo'){ throw new Exception("No autorizado");}
         }
         catch(Exception $e){
@@ -67,7 +67,7 @@ class AuthMW
         
         try{
             $token = trim(explode('Bearer', $header)[1]);
-            $payload = json_decode(AutentificadorJWT::ObtenerData($token));
+            $payload = AutentificadorJWT::ObtenerData($token);
             if(!Usuario::validarRol($payload->rol)){ throw new Exception("No autorizado");}
             
         }

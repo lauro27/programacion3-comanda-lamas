@@ -82,7 +82,7 @@ class MesaController extends Mesa implements IApiUsable
         $header = $request->getHeaderLine("authorization");
         $token = trim(explode('Bearer', $header)[1]);
         
-        $data = json_decode(AutentificadorJWT::ObtenerData($token));
+        $data = AutentificadorJWT::ObtenerData($token);
 
         $parametros = $request->getParsedBody();
         $cod = $parametros['codigo'];

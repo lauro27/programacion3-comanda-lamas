@@ -115,7 +115,9 @@ class UsuarioController extends Usuario implements IApiUsable
         $user->usuario = $value['usuario'];
         $user->clave = $value['clave'];
         $user->rol = $value['rol'];
-        $user->crearUsuario();
+        if(Usuario::validarRol($user->rol)){
+          $user->crearUsuario();
+        }
       }
       
       if(count($array) == 0)
